@@ -6,8 +6,15 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		10549DB6277F4F10CC7D633E /* Pods_fancyLyrics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5731991E65FD3C16BEEA4EED /* Pods_fancyLyrics.framework */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		52BBB3FA2E1F50820065B269 /* fancyLyrics.pock */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = fancyLyrics.pock; sourceTree = BUILT_PRODUCTS_DIR; };
+		5731991E65FD3C16BEEA4EED /* Pods_fancyLyrics.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_fancyLyrics.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BABC35D0CA3FEBA9E0382EA1 /* Pods-fancyLyrics.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-fancyLyrics.debug.xcconfig"; path = "Target Support Files/Pods-fancyLyrics/Pods-fancyLyrics.debug.xcconfig"; sourceTree = "<group>"; };
+		C8AD38AE9AB7BF1FA02B4BC8 /* Pods-fancyLyrics.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-fancyLyrics.release.xcconfig"; path = "Target Support Files/Pods-fancyLyrics/Pods-fancyLyrics.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -36,17 +43,29 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				10549DB6277F4F10CC7D633E /* Pods_fancyLyrics.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		058FF560699F3F7164E63DCD /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				BABC35D0CA3FEBA9E0382EA1 /* Pods-fancyLyrics.debug.xcconfig */,
+				C8AD38AE9AB7BF1FA02B4BC8 /* Pods-fancyLyrics.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		52BBB3F02E1F50820065B269 = {
 			isa = PBXGroup;
 			children = (
 				52BBB3FC2E1F50820065B269 /* fancyLyrics */,
 				52BBB3FB2E1F50820065B269 /* Products */,
+				058FF560699F3F7164E63DCD /* Pods */,
+				874325ACB95982EB6EC33A70 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -58,6 +77,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		874325ACB95982EB6EC33A70 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5731991E65FD3C16BEEA4EED /* Pods_fancyLyrics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -65,6 +92,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 52BBB4032E1F50820065B269 /* Build configuration list for PBXNativeTarget "fancyLyrics" */;
 			buildPhases = (
+				B1C5080C1200E67ED73DA07A /* [CP] Check Pods Manifest.lock */,
 				52BBB3F52E1F50820065B269 /* Sources */,
 				52BBB3F62E1F50820065B269 /* Frameworks */,
 				52BBB3F72E1F50820065B269 /* Resources */,
@@ -78,8 +106,6 @@
 				52BBB3FC2E1F50820065B269 /* fancyLyrics */,
 			);
 			name = fancyLyrics;
-			packageProductDependencies = (
-			);
 			productName = fancyLyrics;
 			productReference = 52BBB3FA2E1F50820065B269 /* fancyLyrics.pock */;
 			productType = "com.apple.product-type.bundle";
@@ -131,6 +157,7 @@
 /* Begin PBXShellScriptBuildPhase section */
 		52BBB3F82E1F50820065B269 /* [PK] Install widget */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -142,10 +169,33 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/output",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Install widget.\necho \"[${PRODUCT_NAME}.pock] Starting installation\"\nFILEPATH=$TARGET_BUILD_DIR/$PRODUCT_NAME.pock \nopen \"$FILEPATH\"";
+			shellScript = "#!/bin/bash\n\nset -x\n\nSRC=\"${BUILT_PRODUCTS_DIR}/${FULL_PRODUCT_NAME}\"\nDEST=\"$HOME/Library/Application Support/Pock/Widgets\"\n\necho \"SRC: \\\"$SRC\\\"\"\necho \"DEST: \\\"$DEST\\\"\"\n\nmkdir -p \"$DEST\" || echo \"mkdir failed\"\nls -la \"$SRC\" || echo \"ls failed\"\ncp -R \"$SRC\" \"$DEST\" || echo \"cp failed\"\n";
+		};
+		B1C5080C1200E67ED73DA07A /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-fancyLyrics-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -162,38 +212,46 @@
 /* Begin XCBuildConfiguration section */
 		52BBB4042E1F50820065B269 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = BABC35D0CA3FEBA9E0382EA1 /* Pods-fancyLyrics.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = fancyLyrics/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Application\\ Support/Pock/Widgets";
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
 				MARKETING_VERSION = 1.0;
+				NEW_SETTING = "";
 				PRODUCT_BUNDLE_IDENTIFIER = fixu.fancyLyrics;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 6.0;
 				WRAPPER_EXTENSION = pock;
 			};
 			name = Debug;
 		};
 		52BBB4052E1F50820065B269 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C8AD38AE9AB7BF1FA02B4BC8 /* Pods-fancyLyrics.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = fancyLyrics/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Application\\ Support/Pock/Widgets";
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
 				MARKETING_VERSION = 1.0;
+				NEW_SETTING = "";
 				PRODUCT_BUNDLE_IDENTIFIER = fixu.fancyLyrics;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 6.0;
 				WRAPPER_EXTENSION = pock;
 			};
 			name = Release;
@@ -251,7 +309,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MACOSX_DEPLOYMENT_TARGET = 15.5;
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -306,7 +364,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MACOSX_DEPLOYMENT_TARGET = 15.5;
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = macosx;

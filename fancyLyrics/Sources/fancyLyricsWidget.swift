@@ -3,7 +3,7 @@
 //  fancyLyrics
 //
 //  Created by Oliwier Bażant on 10.07.2025.
-//  
+//
 //
 
 import Foundation
@@ -12,16 +12,19 @@ import PockKit
 
 class fancyLyricsWidget: PKWidget {
     
-    static var identifier: String = "fixu.fancyLyrics"
+    static let identifier: String = "fixu.fancyLyrics"
     var customizationLabel: String = "fancyLyrics"
     var view: NSView!
     
     required init() {
-        self.view = PKButton(title: "fancyLyrics", target: self, action: #selector(printMessage))
+        self.view = PKButton(title: "fancyLyrics", target: self)
     }
     
     @objc private func printMessage() {
-        NSLog("[fancyLyricsWidget]: Hello, World!")
+        let notification = NSUserNotification()
+        notification.title = "fancyLyrics"
+        notification.informativeText = "Widget copied to Pock!"
+        NSUserNotificationCenter.default.deliver(notification)
     }
     
 }
